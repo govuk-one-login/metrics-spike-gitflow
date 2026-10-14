@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "event_type": "pull_request",
+    "delivery_id": "test-event-003",
+    "received_at": "2026-10-14T10:00:05Z"
+  },
+  "payload": {
+    "action": "closed",
+    "number": 43,
+    "pull_request": {
+      "number": 43,
+      "state": "closed",
+      "title": "Merge main back into develop after release 1.0.0",
+      "merged": true,
+      "merged_at": "2026-10-14T10:00:00Z",
+      "merge_commit_sha": "cccccccccccccccccccccccccccccccccccccccc",
+      "head": {
+        "ref": "main",
+        "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "base": {
+        "ref": "develop"
+      }
+    },
+    "repository": {
+      "id": 123456,
+      "full_name": "example-org/test-release-repo"
+    }
+  }
+}
