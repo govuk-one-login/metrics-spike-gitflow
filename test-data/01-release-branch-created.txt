@@ -1,0 +1,19 @@
+{
+  "metadata": {
+    "event_type": "create",
+    "delivery_id": "test-event-001",
+    "received_at": "2026-10-01T09:00:00Z"
+  },
+  "payload": {
+    "ref": "release/1.0.0",
+    "ref_type": "branch",
+    "master_branch": "main",
+    "repository": {
+      "id": 123456,
+      "full_name": "example-org/test-release-repo"
+    },
+    "sender": {
+      "login": "test-developer"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "metadata": {
+    "event_type": "pull_request",
+    "delivery_id": "test-event-002",
+    "received_at": "2026-10-14T09:00:05Z"
+  },
+  "payload": {
+    "action": "closed",
+    "number": 42,
+    "pull_request": {
+      "number": 42,
+      "state": "closed",
+      "title": "Release 1.0.0",
+      "merged": true,
+      "merged_at": "2026-10-14T09:00:00Z",
+      "merge_commit_sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "head": {
+        "ref": "release/1.0.0",
+        "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "base": {
+        "ref": "main"
+      }
+    },
+    "repository": {
+      "id": 123456,
+      "full_name": "example-org/test-release-repo"
+    }
+  }
+}
