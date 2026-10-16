@@ -23,3 +23,23 @@ jobs:
     steps:
       - name: Run checkout github action
         uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Send pull request event to Dynatrace
+        uses: dynatrace-oss/dynatrace-github-action@v9
+        with:
+          url: ${{ secrets.DT_URL }}
+          token: ${{ secrets.DT_TOKEN }}
+          events: |
+            - title: "GitHub pull request activity"
+              type: CUSTOM_INFO
+              properties:
+                source: github-actions
+                repository: "${{ github.repository }}"
+                metadata.event_type: pull_request
+                metadata.action: "${{ github.event.action }}"
+                metadata.run_id: "${{ github.run_id }}"
+                pull_request.number: "${{ github.event.pull_request.number }}"
+                git.commit: "${{ github.event.pull_request.head.sha }}"
+                git.ref: "${{ github.head_ref }}"
+                git.base_ref: "${{ github.base_ref }}"
+                actor: "${{ github.actor }}"
