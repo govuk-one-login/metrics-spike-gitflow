@@ -1,0 +1,12 @@
+name: On Workflow Run
+
+on:
+  workflow_run:
+    types: [completed]
+
+jobs:
+  on-complete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check conclusion
+        run: echo "The previous workflow finished with status ${{ github.event.workflow_run.conclusion }}"
