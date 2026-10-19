@@ -1,0 +1,37 @@
+name: On push (main)
+
+on:
+  push:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  set-up:
+    name: Generate versions
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Run checkout github action
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+
+      - name: Send main push event to Dynatrace
+        uses: dynatrace-oss/dynatrace-github-action@v9
+        with:
+          url: ${{ secrets.DT_URL }}
+          token: ${{ secrets.DT_TOKEN }}
+          events: |
+            - title: "GitHub push to main"
+              type: CUSTOM_INFO
+              properties:
+                source: github-actions
+                repository: "${{ github.repository }}"
+                metadata.event_type: push
+                metadata.run_id: "${{ github.run_id }}"
+                git.commit: "${{ github.sha }}"
+                git.before: "${{ github.event.before }}"
+                git.ref: "${{ github.ref }}"
+                actor: "${{ github.actor }}"

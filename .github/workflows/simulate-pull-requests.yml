@@ -1,0 +1,32 @@
+name: Simulate pull request events
+
+on:
+  workflow_dispatch:
+    inputs:
+      count:
+        description: Number of fake PR-created events (1-100)
+        required: true
+        default: '10'
+        type: number
+
+permissions:
+  contents: read
+
+jobs:
+  simulate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+      - name: Send fake PR events to Dynatrace
+        env:
+          DT_URL: ${{ secrets.DT_URL }}
+          DT_TOKEN: ${{ secrets.DT_TOKEN }}
+          SIMULATION_COUNT: ${{ inputs.count }}
+          SIMULATION_BATCH: fake-pr-${{ github.run_id }}-${{ github.run_attempt }}
+          SIMULATION_REPOSITORY: ${{ github.repository }}
+        run: |
+          python3 scripts/simulate_pull_requests.py \
+            --count "$SIMULATION_COUNT" \
+            --batch-id "$SIMULATION_BATCH" \
+            --repository "$SIMULATION_REPOSITORY" \
+            --send
