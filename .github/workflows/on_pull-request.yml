@@ -47,5 +47,5 @@ jobs:
                 actor: "${{ github.actor }}"
                 pull_request.created_at: "${{ github.event.pull_request.created_at }}"
                 pull_request.merged: "${{ github.event.pull_request.merged }}"
-                pull_request.merged_at: "${{ github.event.pull_request.merged_at }}"
-                pull_request.merge_commit_sha: "${{ github.event.pull_request.merge_commit_sha }}"
+                pull_request.merged_at: "${{ github.event.pull_request.merged_at || 'not-merged' }}"
+                pull_request.merge_commit_sha: "${{ github.event.pull_request.merged && github.event.pull_request.merge_commit_sha || 'not-merged' }}"
