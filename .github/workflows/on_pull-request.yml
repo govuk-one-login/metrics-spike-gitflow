@@ -7,9 +7,11 @@ on:
       - reopened
       - synchronize
       - ready_for_review
+      - closed
     branches:
       - develop
-      - release/*
+      - release/**
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -43,3 +45,7 @@ jobs:
                 git.ref: "${{ github.head_ref }}"
                 git.base_ref: "${{ github.base_ref }}"
                 actor: "${{ github.actor }}"
+                pull_request.created_at: "${{ github.event.pull_request.created_at }}"
+                pull_request.merged: "${{ github.event.pull_request.merged }}"
+                pull_request.merged_at: "${{ github.event.pull_request.merged_at }}"
+                pull_request.merge_commit_sha: "${{ github.event.pull_request.merge_commit_sha }}"
